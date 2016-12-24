@@ -181,9 +181,9 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
             if (!handled) {
                 ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attrs,
                         R.styleable.ChameleonView, mTheme);
-                Drawable background = a.getDrawable(R.styleable.ChameleonView_android_background);
+                Drawable background = a.getDrawable(R.styleable.ChameleonView_android_background, false);
                 if (background != null) {
-                    int tint = a.getColor(R.styleable.ChameleonView_backgroundTint, 0);
+                    int tint = a.getColor(R.styleable.ChameleonView_backgroundTint, 0, false);
                     if (tint != 0) {
                         DrawableCompat.setTint(background, tint);
                     }

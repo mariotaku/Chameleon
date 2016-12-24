@@ -49,19 +49,19 @@ public class ChameleonTypedArray {
         return new ChameleonTypedArray(array, hasAttribute, attributeReferences, theme);
     }
 
-    public int getColor(int index, int defValue) {
+    public int getColor(int index, int defValue, boolean resolveStyle) {
         final int ref = attributeReferences[index];
         int color = getCommonColorReference(ref);
         if (color != 0) return color;
-        if (!hasAttributeStates[index]) return defValue;
+        if (!resolveStyle && !hasAttributeStates[index]) return defValue;
         return wrapped.getColor(index, defValue);
     }
 
-    public Drawable getDrawable(int index) {
+    public Drawable getDrawable(int index, boolean resolveStyle) {
         final int ref = attributeReferences[index];
         int color = getCommonColorReference(ref);
         if (color != 0) return new ColorDrawable(color);
-        if (!hasAttributeStates[index]) return null;
+        if (!resolveStyle && !hasAttributeStates[index]) return null;
         return wrapped.getDrawable(index);
     }
 

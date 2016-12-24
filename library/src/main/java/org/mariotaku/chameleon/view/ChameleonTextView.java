@@ -97,9 +97,9 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             Appearance appearance = new Appearance();
             ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
                     R.styleable.ChameleonEditText, theme);
-            appearance.setTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColor, view.getCurrentTextColor()));
-            appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink()));
-            appearance.setBackgroundColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, theme.getColorAccent()));
+            appearance.setTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColor, view.getCurrentTextColor(), false));
+            appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink(), false));
+            appearance.setBackgroundColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, theme.getColorAccent(), false));
             a.recycle();
             return appearance;
         }

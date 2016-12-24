@@ -41,7 +41,7 @@ public class ChameleonFloatingActionButton extends FloatingActionButton implemen
         Appearance appearance = new Appearance();
         ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
                 R.styleable.ChameleonFloatingActionButton, theme);
-        final int backgroundTint = a.getColor(R.styleable.ChameleonFloatingActionButton_backgroundTint, theme.getColorAccent());
+        final int backgroundTint = a.getColor(R.styleable.ChameleonFloatingActionButton_backgroundTint, theme.getColorAccent(), false);
         appearance.setBackgroundTint(backgroundTint);
         appearance.setIconTint(ChameleonUtils.getColorDependent(backgroundTint));
         a.recycle();

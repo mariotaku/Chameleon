@@ -43,7 +43,7 @@ public class ChameleonToolbar extends Toolbar implements ChameleonView {
         Appearance appearance = new Appearance();
         ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
                 R.styleable.ChameleonToolbar, theme);
-        final Drawable background = a.getDrawable(R.styleable.ChameleonToolbar_android_background);
+        final Drawable background = a.getDrawable(R.styleable.ChameleonToolbar_android_background, false);
         if (background != null) {
             appearance.setBackground(background);
         } else {
@@ -68,8 +68,8 @@ public class ChameleonToolbar extends Toolbar implements ChameleonView {
                 subtitleTextColorDef = theme.getTextColorSecondary();
             }
         }
-        appearance.setTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_titleTextColor, titleTextColorDef));
-        appearance.setSubTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_subtitleTextColor, subtitleTextColorDef));
+        appearance.setTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_titleTextColor, titleTextColorDef, false));
+        appearance.setSubTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_subtitleTextColor, subtitleTextColorDef, false));
         a.recycle();
         return appearance;
     }
