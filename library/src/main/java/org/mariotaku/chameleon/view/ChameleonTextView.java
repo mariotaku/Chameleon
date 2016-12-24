@@ -57,7 +57,8 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
     public static class Appearance implements ChameleonView.Appearance {
         private int textColor;
         private int linkTextColor;
-        private int backgroundColor;
+        private int tintColor;
+        private int backgroundTintColor;
 
 
         public int getLinkTextColor() {
@@ -68,12 +69,20 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             this.linkTextColor = linkTextColor;
         }
 
-        public int getBackgroundColor() {
-            return backgroundColor;
+        public int getTintColor() {
+            return tintColor;
         }
 
-        public void setBackgroundColor(int backgroundColor) {
-            this.backgroundColor = backgroundColor;
+        public void setTintColor(int tintColor) {
+            this.tintColor = tintColor;
+        }
+
+        public int getBackgroundTintColor() {
+            return backgroundTintColor;
+        }
+
+        public void setBackgroundTintColor(int backgroundTintColor) {
+            this.backgroundTintColor = backgroundTintColor;
         }
 
         public int getTextColor() {
@@ -87,10 +96,13 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
         public static void apply(TextView view, Appearance appearance) {
             view.setLinkTextColor(appearance.getLinkTextColor());
             view.setTextColor(appearance.getTextColor());
-            ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(appearance.getBackgroundColor()));
-            setCursorTint(view, appearance.getBackgroundColor());
-            setHandlerTint(view, appearance.getBackgroundColor());
-            view.setHighlightColor(ChameleonUtils.adjustAlpha(appearance.getBackgroundColor(), 0.4f));
+            final int backgroundTintColor = appearance.getBackgroundTintColor();
+            if (backgroundTintColor != 0) {
+                ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(backgroundTintColor));
+            }
+            setCursorTint(view, appearance.getTintColor());
+            setHandlerTint(view, appearance.getTintColor());
+            view.setHighlightColor(ChameleonUtils.adjustAlpha(appearance.getTintColor(), 0.4f));
         }
 
         public static Appearance create(TextView view, Context context, AttributeSet attributeSet, Chameleon.Theme theme) {
@@ -99,7 +111,8 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                     R.styleable.ChameleonEditText, theme);
             appearance.setTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColor, view.getCurrentTextColor(), false));
             appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink(), false));
-            appearance.setBackgroundColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, theme.getColorAccent(), false));
+            appearance.setBackgroundTintColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, 0, false));
+            appearance.setTintColor(theme.getColorAccent());
             a.recycle();
             return appearance;
         }
