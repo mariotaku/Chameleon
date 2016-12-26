@@ -17,10 +17,13 @@ import org.mariotaku.chameleon.Chameleon;
 import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
 import org.mariotaku.chameleon.view.ChameleonAutoCompleteTextView;
+import org.mariotaku.chameleon.view.ChameleonButton;
+import org.mariotaku.chameleon.view.ChameleonCheckBox;
 import org.mariotaku.chameleon.view.ChameleonEditText;
 import org.mariotaku.chameleon.view.ChameleonFloatingActionButton;
 import org.mariotaku.chameleon.view.ChameleonMultiAutoCompleteTextView;
 import org.mariotaku.chameleon.view.ChameleonProgressBar;
+import org.mariotaku.chameleon.view.ChameleonRadioButton;
 import org.mariotaku.chameleon.view.ChameleonSwipeRefreshLayout;
 import org.mariotaku.chameleon.view.ChameleonSwitchCompat;
 import org.mariotaku.chameleon.view.ChameleonTextView;
@@ -84,8 +87,23 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
                 view = new ChameleonMultiAutoCompleteTextView(context, attrs);
                 break;
             }
+            case "Button":
+            case "android.support.v7.widget.AppCompatButton": {
+                view = new ChameleonButton(context, attrs);
+                break;
+            }
             case "ProgressBar": {
                 view = new ChameleonProgressBar(context, attrs);
+                break;
+            }
+            case "RadioButton":
+            case "android.support.v7.widget.AppCompatRadioButton": {
+                view = new ChameleonRadioButton(context, attrs);
+                break;
+            }
+            case "CheckBox":
+            case "android.support.v7.widget.AppCompatCheckBox": {
+                view = new ChameleonCheckBox(context, attrs);
                 break;
             }
             case "android.support.design.widget.FloatingActionButton": {

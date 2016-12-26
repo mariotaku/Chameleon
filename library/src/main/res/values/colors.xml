@@ -8,7 +8,12 @@
     <!--12%-->
     <color name="chameleon_switch_track_disabled_light">#1F000000</color>
     <!-- 26% -->
+    <color name="chameleon_control_disabled_light">#43000000</color>
     <color name="chameleon_switch_track_normal_light">#43000000</color>
+
+    <!-- 54% -->
+    <color name="chameleon_control_normal_light">#8A000000</color>
+
     <!--Grey 50, #FAFAFA, Opacity  100%-->
     <color name="chameleon_switch_thumb_normal_light">#FFFAFAFA</color>
     <!--Grey 400, #BDBDBD, Opacity  100%-->
@@ -18,7 +23,12 @@
     <!--10%-->
     <color name="chameleon_switch_track_disabled_dark">#1AFFFFFF</color>
     <!-- 30% -->
+    <color name="chameleon_control_disabled_dark">#4DFFFFFF</color>
     <color name="chameleon_switch_track_normal_dark">#4DFFFFFF</color>
+
+    <!-- 70% -->
+    <color name="chameleon_control_normal_dark">#B3FFFFFF</color>
+
     <!--Grey 400, #BDBDBD, Opacity  100%-->
     <color name="chameleon_switch_thumb_normal_dark">#FFBDBDBD</color>
     <!--Grey 800, #424242, Opacity 100%-->

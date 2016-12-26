@@ -67,6 +67,8 @@ public class Chameleon {
         final ChameleonInflationFactory factory = new ChameleonInflationFactory(inflater, activity,
                 creator, delegate, theme, postApplyViews);
         LayoutInflaterCompat.setFactory(inflater, factory);
+
+        ChameleonUtils.setTaskColor(activity, theme.getColorPrimary());
     }
 
     @SuppressWarnings("WeakerAccess")

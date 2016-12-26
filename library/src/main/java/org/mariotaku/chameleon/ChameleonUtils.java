@@ -1,6 +1,7 @@
 package org.mariotaku.chameleon;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.ColorStateList;
@@ -13,6 +14,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -133,6 +135,20 @@ public class ChameleonUtils {
             } else {
                 decorView.setSystemUiVisibility(systemUiVisibility & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
+        }
+    }
+
+    public static void setTaskColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ChameleonUtilsL.setTaskColor(activity, color);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private static class ChameleonUtilsL {
+        static void setTaskColor(Activity activity, int colorPrimary) {
+            final ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(null, null, colorPrimary);
+            activity.setTaskDescription(description);
         }
     }
 }
