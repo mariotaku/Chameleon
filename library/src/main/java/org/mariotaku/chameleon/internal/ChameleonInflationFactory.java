@@ -16,6 +16,7 @@ import android.view.View;
 import org.mariotaku.chameleon.Chameleon;
 import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
+import org.mariotaku.chameleon.view.ChameleonActionBarContextView;
 import org.mariotaku.chameleon.view.ChameleonAutoCompleteTextView;
 import org.mariotaku.chameleon.view.ChameleonButton;
 import org.mariotaku.chameleon.view.ChameleonCheckBox;
@@ -120,6 +121,10 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
             }
             case "android.support.v7.widget.SwitchCompat": {
                 view = new ChameleonSwitchCompat(context, attrs);
+                break;
+            }
+            case "android.support.v7.widget.ActionBarContextView": {
+                view = new ChameleonActionBarContextView(context, attrs);
                 break;
             }
         }

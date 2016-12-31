@@ -2,8 +2,10 @@ package org.mariotaku.chameleon;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.view.Menu;
 
 /**
@@ -54,6 +56,12 @@ public class ChameleonActivity extends AppCompatActivity implements Chameleon.Th
         final boolean result = super.onPrepareOptionsMenu(menu);
         mChameleon.themeActionMenu(menu);
         return result;
+    }
+
+    @Override
+    public void onSupportActionModeStarted(@NonNull ActionMode mode) {
+        super.onSupportActionModeStarted(mode);
+        mChameleon.themeActionMode(mode);
     }
 
     @Override

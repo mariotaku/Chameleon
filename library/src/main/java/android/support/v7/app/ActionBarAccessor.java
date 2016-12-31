@@ -1,5 +1,6 @@
 package android.support.v7.app;
 
+import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.DecorToolbar;
 
 /**
@@ -7,6 +8,14 @@ import android.support.v7.widget.DecorToolbar;
  */
 
 public class ActionBarAccessor {
+
+    public static ActionBarContextView getContextView(ActionBar actionBar) {
+        if (actionBar instanceof WindowDecorActionBar) {
+            return ((WindowDecorActionBar) actionBar).mContextView;
+        }
+        return null;
+    }
+
     public static DecorToolbar getDecorToolbar(ActionBar actionBar) {
         if (actionBar instanceof WindowDecorActionBar) {
             return ((WindowDecorActionBar) actionBar).mDecorToolbar;

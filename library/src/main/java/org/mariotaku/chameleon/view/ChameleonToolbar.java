@@ -40,38 +40,7 @@ public class ChameleonToolbar extends Toolbar implements ChameleonView {
     @Nullable
     @Override
     public Appearance createAppearance(@NonNull Context context, @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme) {
-        Appearance appearance = new Appearance();
-        ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
-                R.styleable.ChameleonToolbar, theme);
-        final Drawable background = a.getDrawable(R.styleable.ChameleonToolbar_android_background, false);
-        if (background != null) {
-            appearance.setBackground(background);
-        } else {
-            appearance.setBackground(new ColorDrawable(theme.getColorToolbar()));
-        }
-        final int titleTextColorDef, subtitleTextColorDef;
-
-        if (ChameleonUtils.isColorLight(theme.getColorToolbar())) {
-            if (ChameleonUtils.isColorLight(theme.getColorBackground())) {
-                titleTextColorDef = theme.getTextColorPrimary();
-                subtitleTextColorDef = theme.getTextColorSecondary();
-            } else {
-                titleTextColorDef = theme.getTextColorPrimaryInverse();
-                subtitleTextColorDef = theme.getTextColorSecondaryInverse();
-            }
-        } else {
-            if (ChameleonUtils.isColorLight(theme.getColorBackground())) {
-                titleTextColorDef = theme.getTextColorPrimaryInverse();
-                subtitleTextColorDef = theme.getTextColorSecondaryInverse();
-            } else {
-                titleTextColorDef = theme.getTextColorPrimary();
-                subtitleTextColorDef = theme.getTextColorSecondary();
-            }
-        }
-        appearance.setTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_titleTextColor, titleTextColorDef, false));
-        appearance.setSubTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_subtitleTextColor, subtitleTextColorDef, false));
-        a.recycle();
-        return appearance;
+        return Appearance.create(context, attributeSet, theme);
     }
 
     @Override
@@ -110,6 +79,51 @@ public class ChameleonToolbar extends Toolbar implements ChameleonView {
 
         public Drawable getBackground() {
             return background;
+        }
+
+        @NonNull
+        public static Appearance create(@NonNull Context context, @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme) {
+            Appearance appearance = new Appearance();
+            ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
+                    R.styleable.ChameleonToolbar, theme);
+            final Drawable background = a.getDrawable(R.styleable.ChameleonToolbar_android_background, false);
+            if (background != null) {
+                appearance.setBackground(background);
+            } else {
+                appearance.setBackground(new ColorDrawable(theme.getColorToolbar()));
+            }
+            final TextColor textColor = TextColor.get(theme);
+            appearance.setTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_titleTextColor, textColor.primary, false));
+            appearance.setSubTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_subtitleTextColor, textColor.secondary, false));
+            a.recycle();
+            return appearance;
+        }
+
+        public static class TextColor {
+            int primary;
+            int secondary;
+
+            public static TextColor get(Chameleon.Theme theme) {
+                final TextColor color = new TextColor();
+                if (ChameleonUtils.isColorLight(theme.getColorToolbar())) {
+                    if (ChameleonUtils.isColorLight(theme.getColorBackground())) {
+                        color.primary = theme.getTextColorPrimary();
+                        color.secondary = theme.getTextColorSecondary();
+                    } else {
+                        color.primary = theme.getTextColorPrimaryInverse();
+                        color.secondary = theme.getTextColorSecondaryInverse();
+                    }
+                } else {
+                    if (ChameleonUtils.isColorLight(theme.getColorBackground())) {
+                        color.primary = theme.getTextColorPrimaryInverse();
+                        color.secondary = theme.getTextColorSecondaryInverse();
+                    } else {
+                        color.primary = theme.getTextColorPrimary();
+                        color.secondary = theme.getTextColorSecondary();
+                    }
+                }
+                return color;
+            }
         }
     }
 }

@@ -16,6 +16,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarAccessor;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.AppCompatDelegateAccessor;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.DecorToolbar;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -28,6 +31,7 @@ import android.view.Window;
 
 import org.mariotaku.chameleon.internal.ChameleonInflationFactory;
 import org.mariotaku.chameleon.internal.SupportMethods;
+import org.mariotaku.chameleon.view.ChameleonActionBarContextView;
 
 /**
  * Created by mariotaku on 2016/12/18.
@@ -154,6 +158,17 @@ public class Chameleon {
             item.setIcon(icon);
         }
         DrawableCompat.setTint(icon, color);
+    }
+
+    public void themeActionMode(ActionMode mode) {
+        if (activity instanceof AppCompatActivity) {
+            final AppCompatDelegate delegate = ((AppCompatActivity) activity).getDelegate();
+            ActionBarContextView contextView = AppCompatDelegateAccessor.getActionModeView(delegate);
+            themeActionMenu(mode.getMenu());
+            if (contextView instanceof ChameleonActionBarContextView) {
+                ((ChameleonActionBarContextView) contextView).themeOverflow(theme);
+            }
+        }
     }
 
     public interface AppearanceCreator {
