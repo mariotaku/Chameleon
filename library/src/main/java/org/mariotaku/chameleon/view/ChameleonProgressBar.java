@@ -36,23 +36,13 @@ public class ChameleonProgressBar extends ProgressBar implements ChameleonView {
     @Nullable
     @Override
     public Appearance createAppearance(@NonNull Context context, @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme) {
-        Appearance appearance = new Appearance();
-        appearance.setProgressColor(theme.getColorAccent());
-        return appearance;
+        return Appearance.create(theme);
     }
-
 
     @Override
     public void applyAppearance(@NonNull ChameleonView.Appearance appearance) {
         final Appearance a = (Appearance) appearance;
-        final Drawable indeterminateDrawable = getIndeterminateDrawable();
-        if (indeterminateDrawable != null) {
-            DrawableCompat.setTint(indeterminateDrawable, a.getProgressColor());
-        }
-        final Drawable progressDrawable = getProgressDrawable();
-        if (progressDrawable != null) {
-            DrawableCompat.setTint(progressDrawable, a.getProgressColor());
-        }
+        Appearance.apply(this, a);
     }
 
     public static class Appearance implements ChameleonView.Appearance {
@@ -64,6 +54,24 @@ public class ChameleonProgressBar extends ProgressBar implements ChameleonView {
 
         public void setProgressColor(int progressColor) {
             this.progressColor = progressColor;
+        }
+
+        public static void apply(ProgressBar view, Appearance a) {
+            final Drawable indeterminateDrawable = view.getIndeterminateDrawable();
+            if (indeterminateDrawable != null) {
+                DrawableCompat.setTint(indeterminateDrawable, a.getProgressColor());
+            }
+            final Drawable progressDrawable = view.getProgressDrawable();
+            if (progressDrawable != null) {
+                DrawableCompat.setTint(progressDrawable, a.getProgressColor());
+            }
+        }
+
+        @NonNull
+        public static Appearance create(@NonNull Chameleon.Theme theme) {
+            Appearance appearance = new Appearance();
+            appearance.setProgressColor(theme.getColorAccent());
+            return appearance;
         }
     }
 }
