@@ -17,7 +17,9 @@ import android.support.v7.app.ActionBarAccessor;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.app.AppCompatDelegateAccessor;
+import android.support.v7.app.WindowDecorActionBar;
 import android.support.v7.view.ActionMode;
+import android.support.v7.view.StandaloneActionMode;
 import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.DecorToolbar;
 import android.support.v7.widget.Toolbar;
@@ -162,9 +164,15 @@ public class Chameleon {
 
     public void themeActionMode(ActionMode mode) {
         if (activity instanceof AppCompatActivity) {
-            final AppCompatDelegate delegate = ((AppCompatActivity) activity).getDelegate();
-            ActionBarContextView contextView = AppCompatDelegateAccessor.getActionModeView(delegate);
             themeActionMenu(mode.getMenu());
+            ActionBarContextView contextView = null;
+            if (mode instanceof StandaloneActionMode) {
+                final AppCompatDelegate delegate = ((AppCompatActivity) activity).getDelegate();
+                contextView = AppCompatDelegateAccessor.getActionModeView(delegate);
+            } else if (mode instanceof WindowDecorActionBar.ActionModeImpl) {
+                contextView = ActionBarAccessor.getContextView(((AppCompatActivity) activity).getSupportActionBar());
+            }
+
             if (contextView instanceof ChameleonActionBarContextView) {
                 ((ChameleonActionBarContextView) contextView).themeOverflow(theme);
             }
