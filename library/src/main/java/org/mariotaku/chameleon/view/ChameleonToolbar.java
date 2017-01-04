@@ -1,7 +1,6 @@
 package org.mariotaku.chameleon.view;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -89,8 +88,6 @@ public class ChameleonToolbar extends Toolbar implements ChameleonView {
             final Drawable background = a.getDrawable(R.styleable.ChameleonToolbar_android_background, false);
             if (background != null) {
                 appearance.setBackground(background);
-            } else {
-                appearance.setBackground(new ColorDrawable(theme.getColorToolbar()));
             }
             final TextColor textColor = TextColor.get(theme);
             appearance.setTitleTextColor(a.getColor(R.styleable.ChameleonToolbar_titleTextColor, textColor.primary, false));
