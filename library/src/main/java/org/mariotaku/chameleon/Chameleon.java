@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import org.mariotaku.chameleon.internal.ChameleonInflationFactory;
+import org.mariotaku.chameleon.internal.InternalUtils;
 import org.mariotaku.chameleon.internal.SupportMethods;
 import org.mariotaku.chameleon.view.ChameleonActionBarContextView;
 
@@ -422,30 +423,30 @@ public class Chameleon {
         public static Theme from(Context context) {
             Theme theme = new Theme();
             TypedArray a = context.obtainStyledAttributes(R.styleable.ChameleonTheme);
-            theme.setColorBackground(a.getColor(R.styleable.ChameleonTheme_android_colorBackground, 0));
-            theme.setColorForeground(a.getColor(R.styleable.ChameleonTheme_android_colorForeground, 0));
+            theme.setColorBackground(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_colorBackground, 0));
+            theme.setColorForeground(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_colorForeground, 0));
 
-            theme.setColorPrimary(a.getColor(R.styleable.ChameleonTheme_colorPrimary, 0));
-            theme.setColorPrimaryDark(a.getColor(R.styleable.ChameleonTheme_colorPrimaryDark, 0));
-            theme.setColorAccent(a.getColor(R.styleable.ChameleonTheme_colorAccent, 0));
+            theme.setColorPrimary(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorPrimary, 0));
+            theme.setColorPrimaryDark(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorPrimaryDark, 0));
+            theme.setColorAccent(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorAccent, 0));
 
-            theme.setTextColorPrimary(a.getColor(R.styleable.ChameleonTheme_android_textColorPrimary, 0));
-            theme.setTextColorPrimaryInverse(a.getColor(R.styleable.ChameleonTheme_android_textColorPrimaryInverse, 0));
-            theme.setTextColorSecondary(a.getColor(R.styleable.ChameleonTheme_android_textColorSecondary, 0));
-            theme.setTextColorSecondaryInverse(a.getColor(R.styleable.ChameleonTheme_android_textColorSecondaryInverse, 0));
-            theme.setTextColorLink(a.getColor(R.styleable.ChameleonTheme_android_textColorLink, 0));
-            theme.setTextColorLinkInverse(a.getColor(R.styleable.ChameleonTheme_android_textColorLinkInverse, 0));
+            theme.setTextColorPrimary(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorPrimary, 0));
+            theme.setTextColorPrimaryInverse(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorPrimaryInverse, 0));
+            theme.setTextColorSecondary(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorSecondary, 0));
+            theme.setTextColorSecondaryInverse(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorSecondaryInverse, 0));
+            theme.setTextColorLink(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorLink, 0));
+            theme.setTextColorLinkInverse(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_textColorLinkInverse, 0));
 
-            theme.setColorEdgeEffect(a.getColor(R.styleable.ChameleonTheme_colorEdgeEffect, 0));
+            theme.setColorEdgeEffect(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorEdgeEffect, 0));
 
-            theme.setColorControlNormal(a.getColor(R.styleable.ChameleonTheme_colorControlNormal, 0));
-            theme.setColorControlActivated(a.getColor(R.styleable.ChameleonTheme_colorControlActivated, 0));
-            theme.setColorControlHighlight(a.getColor(R.styleable.ChameleonTheme_colorControlHighlight, 0));
+            theme.setColorControlNormal(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorControlNormal, 0));
+            theme.setColorControlActivated(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorControlActivated, 0));
+            theme.setColorControlHighlight(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorControlHighlight, 0));
 
-            theme.setStatusBarColor(a.getColor(R.styleable.ChameleonTheme_android_statusBarColor, 0));
-            theme.setNavigationBarColor(a.getColor(R.styleable.ChameleonTheme_android_navigationBarColor, Color.BLACK));
+            theme.setStatusBarColor(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_statusBarColor, 0));
+            theme.setNavigationBarColor(InternalUtils.getColor(a, R.styleable.ChameleonTheme_android_navigationBarColor, Color.BLACK));
 
-            theme.setColorToolbar(a.getColor(R.styleable.ChameleonTheme_colorToolbar, theme.getColorPrimary()));
+            theme.setColorToolbar(InternalUtils.getColor(a, R.styleable.ChameleonTheme_colorToolbar, theme.getColorPrimary()));
             theme.setToolbarColored(a.getBoolean(R.styleable.ChameleonTheme_isToolbarColored, true));
             theme.setActionBarWidgetTheme(a.getResourceId(R.styleable.ChameleonTheme_actionBarWidgetTheme, 0));
 
