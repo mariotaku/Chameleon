@@ -89,6 +89,15 @@ public class ChameleonUtils {
         return drawable;
     }
 
+    public static void tintOrColor(@Nullable Drawable drawable, @ColorInt int color) {
+        if (drawable == null) return;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        } else {
+            DrawableCompat.setTint(drawable, color);
+        }
+    }
+
     @CheckResult
     @Nullable
     public static Activity getActivity(Context context) {

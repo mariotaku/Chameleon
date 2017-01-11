@@ -124,9 +124,9 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                 if (editor != null) {
                     Drawable[] drawables = new Drawable[2];
                     drawables[0] = ContextCompat.getDrawable(textView.getContext(), mCursorDrawableRes);
-                    drawables[0] = ChameleonUtils.createTintedDrawable(drawables[0], color);
                     drawables[1] = ContextCompat.getDrawable(textView.getContext(), mCursorDrawableRes);
-                    drawables[1] = ChameleonUtils.createTintedDrawable(drawables[1], color);
+                    ChameleonUtils.tintOrColor(drawables[0], color);
+                    ChameleonUtils.tintOrColor(drawables[1], color);
                     setField(Class.forName("android.widget.Editor"), editor, "mCursorDrawable", drawables);
                 }
             } catch (Exception e) {
@@ -143,9 +143,15 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                 Object editor = getField(TextView.class, textView, "mEditor");
                 if (editor != null) {
                     final Class<?> editorClass = Class.forName("android.widget.Editor");
-                    setField(editorClass, editor, "mSelectHandleLeft", ChameleonUtils.createTintedDrawable(ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleLeftRes), color));
-                    setField(Class.forName("android.widget.Editor"), editor, "mSelectHandleRight", ChameleonUtils.createTintedDrawable(ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleRightRes), color));
-                    setField(Class.forName("android.widget.Editor"), editor, "mSelectHandleCenter", ChameleonUtils.createTintedDrawable(ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleRes), color));
+                    final Drawable textSelectHandleLeft = ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleLeftRes);
+                    final Drawable textSelectHandleRight = ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleRightRes);
+                    final Drawable textSelectHandle = ContextCompat.getDrawable(textView.getContext(), mTextSelectHandleRes);
+                    ChameleonUtils.tintOrColor(textSelectHandleLeft, color);
+                    ChameleonUtils.tintOrColor(textSelectHandleRight, color);
+                    ChameleonUtils.tintOrColor(textSelectHandle, color);
+                    setField(editorClass, editor, "mSelectHandleLeft", textSelectHandleLeft);
+                    setField(editorClass, editor, "mSelectHandleRight", textSelectHandleRight);
+                    setField(editorClass, editor, "mSelectHandleCenter", textSelectHandle);
                 }
             } catch (Exception e) {
                 // Ignore
