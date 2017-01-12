@@ -55,7 +55,7 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
     }
 
     public static class Appearance implements ChameleonView.Appearance {
-        private int textColor;
+        private ColorStateList textColor;
         private int linkTextColor;
         private int tintColor;
         private int backgroundTintColor;
@@ -85,17 +85,20 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             this.backgroundTintColor = backgroundTintColor;
         }
 
-        public int getTextColor() {
+        public ColorStateList getTextColor() {
             return textColor;
         }
 
-        public void setTextColor(int textColor) {
+        public void setTextColor(ColorStateList textColor) {
             this.textColor = textColor;
         }
 
         public static void apply(TextView view, Appearance appearance) {
             view.setLinkTextColor(appearance.getLinkTextColor());
-            view.setTextColor(appearance.getTextColor());
+            final ColorStateList textColor = appearance.getTextColor();
+            if (textColor != null) {
+                view.setTextColor(textColor);
+            }
             final int backgroundTintColor = appearance.getBackgroundTintColor();
             if (backgroundTintColor != 0) {
                 ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(backgroundTintColor));
@@ -109,7 +112,7 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             Appearance appearance = new Appearance();
             ChameleonTypedArray a = ChameleonTypedArray.obtain(context, attributeSet,
                     R.styleable.ChameleonEditText, theme);
-            appearance.setTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColor, view.getCurrentTextColor(), false));
+            appearance.setTextColor(a.getColorStateList(R.styleable.ChameleonEditText_android_textColor, false));
             appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink(), false));
             appearance.setBackgroundTintColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, 0, false));
             appearance.setTintColor(theme.getColorAccent());

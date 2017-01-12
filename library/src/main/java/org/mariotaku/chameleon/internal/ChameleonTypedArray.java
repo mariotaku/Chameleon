@@ -2,6 +2,7 @@ package org.mariotaku.chameleon.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -55,6 +56,14 @@ public class ChameleonTypedArray {
         if (color != 0) return color;
         if (!resolveStyle && !hasAttributeStates[index]) return defValue;
         return wrapped.getColor(index, defValue);
+    }
+
+    public ColorStateList getColorStateList(int index, boolean resolveStyle) {
+        final int ref = attributeReferences[index];
+        int color = getCommonColorReference(ref);
+        if (color != 0) return ColorStateList.valueOf(color);
+        if (!resolveStyle && !hasAttributeStates[index]) return null;
+        return wrapped.getColorStateList(index);
     }
 
     public Drawable getDrawable(int index, boolean resolveStyle) {
