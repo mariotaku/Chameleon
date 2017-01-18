@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AbsActionBarViewAccessor;
 import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.ActionMenuPresenterAccessor;
 import android.support.v7.widget.AppCompatImageView;
@@ -43,32 +44,23 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
     @Nullable
     @Override
     public Appearance createAppearance(@NonNull Context context, @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme) {
-        Appearance appearance = new Appearance();
-        ChameleonToolbar.Appearance.TextColor textColor = ChameleonToolbar.Appearance.TextColor.get(theme);
-        appearance.setTitleTextColor(textColor.primary);
-        appearance.setSubTitleTextColor(textColor.secondary);
-        appearance.setBackground(new ColorDrawable(theme.getColorToolbar()));
-        return appearance;
+        return Appearance.create(theme);
     }
 
     @Override
     public void applyAppearance(@NonNull ChameleonView.Appearance appearance) {
         Appearance a = (Appearance) appearance;
-        setTitle(getTitle());
-        TextView titleView = (TextView) findViewById(android.support.v7.appcompat.R.id.action_bar_title);
-        TextView subTitleView = (TextView) findViewById(android.support.v7.appcompat.R.id.action_bar_subtitle);
-        titleView.setTextColor(a.titleTextColor);
-        subTitleView.setTextColor(a.subTitleTextColor);
-        SupportMethods.setBackground(this, a.getBackground());
+        Appearance.apply(a, this);
     }
 
-    public void themeOverflow(Chameleon.Theme theme) {
+    public static void themeOverflow(ActionBarContextView view, Chameleon.Theme theme) {
         int itemColor = ChameleonUtils.getColorDependent(theme.getColorToolbar());
-        final AppCompatImageView overflowIconView = ActionMenuPresenterAccessor.getOverflowButton(mActionMenuPresenter);
+        final AppCompatImageView overflowIconView = ActionMenuPresenterAccessor.getOverflowButton(
+                AbsActionBarViewAccessor.getActionMenuPresenter(view));
         if (overflowIconView != null) {
             overflowIconView.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
         }
-        ImageView closeButton = (ImageView) findViewById(android.support.v7.appcompat.R.id.action_mode_close_button);
+        ImageView closeButton = (ImageView) view.findViewById(android.support.v7.appcompat.R.id.action_mode_close_button);
 
         if (closeButton != null) {
             if (closeButton.getDrawable() == null) {
@@ -107,6 +99,25 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
 
         public Drawable getBackground() {
             return background;
+        }
+
+        @NonNull
+        public static Appearance create(@NonNull Chameleon.Theme theme) {
+            Appearance appearance = new Appearance();
+            ChameleonToolbar.Appearance.TextColor textColor = ChameleonToolbar.Appearance.TextColor.get(theme);
+            appearance.setTitleTextColor(textColor.primary);
+            appearance.setSubTitleTextColor(textColor.secondary);
+            appearance.setBackground(new ColorDrawable(theme.getColorToolbar()));
+            return appearance;
+        }
+
+        public static void apply(Appearance appearance, ActionBarContextView view) {
+            view.setTitle(view.getTitle());
+            TextView titleView = (TextView) view.findViewById(android.support.v7.appcompat.R.id.action_bar_title);
+            TextView subTitleView = (TextView) view.findViewById(android.support.v7.appcompat.R.id.action_bar_subtitle);
+            titleView.setTextColor(appearance.titleTextColor);
+            subTitleView.setTextColor(appearance.subTitleTextColor);
+            SupportMethods.setBackground(view, appearance.getBackground());
         }
     }
 }

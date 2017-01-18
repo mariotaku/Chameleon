@@ -174,9 +174,13 @@ public class Chameleon {
                 contextView = ActionBarAccessor.getContextView(((AppCompatActivity) activity).getSupportActionBar());
             }
 
-            if (contextView instanceof ChameleonActionBarContextView) {
-                ((ChameleonActionBarContextView) contextView).themeOverflow(theme);
+            if (contextView == null) return;
+
+            if (!(contextView instanceof ChameleonActionBarContextView)) {
+                ChameleonActionBarContextView.Appearance appearance = ChameleonActionBarContextView.Appearance.create(theme);
+                ChameleonActionBarContextView.Appearance.apply(appearance, contextView);
             }
+            ChameleonActionBarContextView.themeOverflow(contextView, theme);
         }
     }
 
