@@ -18,6 +18,9 @@ public class InternalUtils {
         } catch (Resources.NotFoundException e) {
             // Fuck Shitsung
             return defValue;
+        }catch (UnsupportedOperationException e) {
+            // Fuck Shitsung again
+            return defValue;
         }
     }
 

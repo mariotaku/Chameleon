@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ActionBarContextView;
-import android.support.v7.widget.ActionMenuPresenterAccessor;
+import android.support.v7.widget.ChameleonActionMenuPresenterAccessor;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -64,7 +64,7 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
 
     public void themeOverflow(Chameleon.Theme theme) {
         int itemColor = ChameleonUtils.getColorDependent(theme.getColorToolbar());
-        final AppCompatImageView overflowIconView = ActionMenuPresenterAccessor.getOverflowButton(mActionMenuPresenter);
+        final AppCompatImageView overflowIconView = ChameleonActionMenuPresenterAccessor.getOverflowButton(mActionMenuPresenter);
         if (overflowIconView != null) {
             overflowIconView.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
         }

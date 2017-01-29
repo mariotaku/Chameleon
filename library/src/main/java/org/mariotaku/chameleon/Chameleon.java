@@ -13,10 +13,10 @@ import android.support.v4.graphics.drawable.DrawableWrapper;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarAccessor;
+import android.support.v7.app.ChameleonActionBarAccessor;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.app.AppCompatDelegateAccessor;
+import android.support.v7.app.ChameleonAppCompatDelegateAccessor;
 import android.support.v7.app.WindowDecorActionBar;
 import android.support.v7.view.ActionMode;
 import android.support.v7.view.StandaloneActionMode;
@@ -118,7 +118,7 @@ public class Chameleon {
     public void themeOverflow() {
         if (activity instanceof AppCompatActivity) {
             final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
-            final DecorToolbar decorToolbar = ActionBarAccessor.getDecorToolbar(actionBar);
+            final DecorToolbar decorToolbar = ChameleonActionBarAccessor.getDecorToolbar(actionBar);
             if (decorToolbar != null) {
                 Toolbar toolbar = (Toolbar) decorToolbar.getViewGroup();
                 int itemColor = ChameleonUtils.getColorDependent(theme.getColorToolbar());
@@ -169,9 +169,9 @@ public class Chameleon {
             ActionBarContextView contextView = null;
             if (mode instanceof StandaloneActionMode) {
                 final AppCompatDelegate delegate = ((AppCompatActivity) activity).getDelegate();
-                contextView = AppCompatDelegateAccessor.getActionModeView(delegate);
+                contextView = ChameleonAppCompatDelegateAccessor.getActionModeView(delegate);
             } else if (mode instanceof WindowDecorActionBar.ActionModeImpl) {
-                contextView = ActionBarAccessor.getContextView(((AppCompatActivity) activity).getSupportActionBar());
+                contextView = ChameleonActionBarAccessor.getContextView(((AppCompatActivity) activity).getSupportActionBar());
             }
 
             if (contextView instanceof ChameleonActionBarContextView) {
