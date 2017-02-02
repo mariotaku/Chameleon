@@ -26,6 +26,7 @@ import org.mariotaku.chameleon.view.ChameleonFloatingActionButton;
 import org.mariotaku.chameleon.view.ChameleonMultiAutoCompleteTextView;
 import org.mariotaku.chameleon.view.ChameleonProgressBar;
 import org.mariotaku.chameleon.view.ChameleonRadioButton;
+import org.mariotaku.chameleon.view.ChameleonSeekBar;
 import org.mariotaku.chameleon.view.ChameleonSwipeRefreshLayout;
 import org.mariotaku.chameleon.view.ChameleonSwitchCompat;
 import org.mariotaku.chameleon.view.ChameleonTextView;
@@ -96,6 +97,11 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
             }
             case "ProgressBar": {
                 view = new ChameleonProgressBar(context, attrs);
+                break;
+            }
+            case "SeekBar":
+            case "android.support.v7.widget.AppCompatSeekBar": {
+                view = new ChameleonSeekBar(context, attrs);
                 break;
             }
             case "RadioButton":

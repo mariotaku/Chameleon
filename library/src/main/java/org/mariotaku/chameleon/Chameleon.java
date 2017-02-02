@@ -178,7 +178,7 @@ public class Chameleon {
 
             if (!(contextView instanceof ChameleonActionBarContextView)) {
                 ChameleonActionBarContextView.Appearance appearance = ChameleonActionBarContextView.Appearance.create(theme);
-                ChameleonActionBarContextView.Appearance.apply(appearance, contextView);
+                ChameleonActionBarContextView.Appearance.apply(contextView, appearance);
             }
             ChameleonActionBarContextView.themeOverflow(contextView, theme);
         }
@@ -186,8 +186,7 @@ public class Chameleon {
 
     public interface AppearanceCreator {
         @Nullable
-        ChameleonView.Appearance createAppearance(@NonNull View view,
-                                                  @NonNull Context context,
+        ChameleonView.Appearance createAppearance(@NonNull View view, @NonNull Context context,
                                                   @NonNull AttributeSet attributeSet,
                                                   @NonNull Chameleon.Theme theme);
 
