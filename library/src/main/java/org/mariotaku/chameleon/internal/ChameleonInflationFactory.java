@@ -21,6 +21,7 @@ import org.mariotaku.chameleon.view.ChameleonActionBarContextView;
 import org.mariotaku.chameleon.view.ChameleonAutoCompleteTextView;
 import org.mariotaku.chameleon.view.ChameleonButton;
 import org.mariotaku.chameleon.view.ChameleonCheckBox;
+import org.mariotaku.chameleon.view.ChameleonCheckedTextView;
 import org.mariotaku.chameleon.view.ChameleonEditText;
 import org.mariotaku.chameleon.view.ChameleonFloatingActionButton;
 import org.mariotaku.chameleon.view.ChameleonMultiAutoCompleteTextView;
@@ -112,6 +113,11 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
             case "CheckBox":
             case "android.support.v7.widget.AppCompatCheckBox": {
                 view = new ChameleonCheckBox(context, attrs);
+                break;
+            }
+            case "CheckedTextView":
+            case "android.support.v7.widget.AppCompatCheckedTextView": {
+                view = new ChameleonCheckedTextView(context, attrs);
                 break;
             }
             case "android.support.design.widget.FloatingActionButton": {
