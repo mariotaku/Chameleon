@@ -56,4 +56,7 @@
         <attr name="titleTextColor"/>
         <attr name="subtitleTextColor"/>
     </declare-styleable>
+    <declare-styleable name="ChameleonCheckedTextView">
+        <attr name="android:checkMark"/>
+    </declare-styleable>
 </resources>

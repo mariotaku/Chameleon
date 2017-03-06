@@ -2,6 +2,7 @@ package org.mariotaku.chameleon.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -43,16 +44,16 @@ public class ChameleonCheckedTextView extends AppCompatCheckedTextView implement
     @Nullable
     @Override
     public Appearance createAppearance(@NonNull Context context, @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme) {
-        return Appearance.create(theme);
+        return Appearance.create(theme, context, attributeSet);
     }
 
     @Override
     public void applyAppearance(@NonNull ChameleonView.Appearance appearance) {
         Appearance a = (Appearance) appearance;
-        setTint(this, a.getAccentColor());
+        setTint(this, a.getAccentColor(), a.checkMarkResource);
     }
 
-    public static void setTint(@NonNull CheckedTextView view, @ColorInt int color) {
+    public static void setTint(@NonNull CheckedTextView view, @ColorInt int color, final int checkMarkResource) {
         ColorStateList sl = new ColorStateList(new int[][]{
                 new int[]{-android.R.attr.state_enabled},
                 new int[]{android.R.attr.state_enabled, -android.R.attr.state_checked},
@@ -64,20 +65,27 @@ public class ChameleonCheckedTextView extends AppCompatCheckedTextView implement
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setCheckMarkTintList(sl);
-        } else {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            Drawable drawable = createTintedDrawable(view.getCheckMarkDrawable(), sl);
+            view.setCheckMarkDrawable(drawable);
+        } else if (checkMarkResource != 0) {
             Drawable drawable = createTintedDrawable(ContextCompat.getDrawable(view.getContext(),
-                    R.drawable.abc_btn_radio_material), sl);
+                    checkMarkResource), sl);
             view.setCheckMarkDrawable(drawable);
         }
     }
 
     public static class Appearance implements ChameleonView.Appearance {
         int accentColor;
+        int checkMarkResource;
 
         @NonNull
-        public static Appearance create(@NonNull Chameleon.Theme theme) {
+        public static Appearance create(@NonNull Chameleon.Theme theme, final Context context, final AttributeSet attributeSet) {
             Appearance appearance = new Appearance();
             appearance.setAccentColor(theme.getColorAccent());
+            TypedArray a = context.obtainStyledAttributes(attributeSet, R.styleable.ChameleonCheckedTextView);
+            appearance.checkMarkResource = a.getResourceId(R.styleable.ChameleonCheckedTextView_android_checkMark, 0);
+            a.recycle();
             return appearance;
         }
 
