@@ -134,7 +134,6 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                 }
             } catch (Exception e) {
                 // Ignore
-                e.printStackTrace();
             }
         }
 
