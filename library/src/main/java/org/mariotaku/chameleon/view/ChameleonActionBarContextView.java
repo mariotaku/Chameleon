@@ -1,5 +1,6 @@
 package org.mariotaku.chameleon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -20,9 +21,11 @@ import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.internal.SupportMethods;
 
 /**
+ * Themed ActionMode view
  * Created by mariotaku on 2017/1/1.
  */
-
+@SuppressLint("PrivateResource")
+@SuppressWarnings("RestrictedApi")
 public class ChameleonActionBarContextView extends ActionBarContextView implements ChameleonView {
     public ChameleonActionBarContextView(Context context) {
         super(context);

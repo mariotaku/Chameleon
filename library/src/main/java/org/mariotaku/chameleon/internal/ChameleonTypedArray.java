@@ -6,6 +6,8 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
 import org.mariotaku.chameleon.Chameleon;
@@ -22,7 +24,8 @@ public class ChameleonTypedArray {
     private final int[] attributeReferences;
     private final Chameleon.Theme theme;
 
-    private ChameleonTypedArray(TypedArray wrapped, boolean[] hasAttributeStates, int[] attributeReferences, Chameleon.Theme theme) {
+    private ChameleonTypedArray(@NonNull TypedArray wrapped, boolean[] hasAttributeStates,
+            int[] attributeReferences, Chameleon.Theme theme) {
         this.wrapped = wrapped;
         this.hasAttributeStates = hasAttributeStates;
         this.attributeReferences = attributeReferences;
@@ -33,17 +36,20 @@ public class ChameleonTypedArray {
         wrapped.recycle();
     }
 
-    public static ChameleonTypedArray obtain(Context context, AttributeSet set, int[] attrs, Chameleon.Theme theme) {
+    public static ChameleonTypedArray obtain(@NonNull Context context, @Nullable AttributeSet set,
+            int[] attrs, Chameleon.Theme theme) {
         @SuppressLint("Recycle") TypedArray array = context.obtainStyledAttributes(set, attrs);
         boolean[] hasAttribute = new boolean[attrs.length];
         int[] attributeReferences = new int[attrs.length];
-        for (int i = 0; i < attrs.length; i++) {
-            final int index = ChameleonUtils.findAttributeIndex(set, attrs[i]);
-            if (index != -1) {
-                hasAttribute[i] = true;
-                String value = set.getAttributeValue(index);
-                if (value != null && value.startsWith("?")) {
-                    attributeReferences[i] = Integer.parseInt(value.substring(1));
+        if (set != null) {
+            for (int i = 0; i < attrs.length; i++) {
+                final int index = ChameleonUtils.findAttributeIndex(set, attrs[i]);
+                if (index != -1) {
+                    hasAttribute[i] = true;
+                    String value = set.getAttributeValue(index);
+                    if (value != null && value.startsWith("?")) {
+                        attributeReferences[i] = Integer.parseInt(value.substring(1));
+                    }
                 }
             }
         }

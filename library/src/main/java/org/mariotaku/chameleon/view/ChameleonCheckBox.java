@@ -1,5 +1,6 @@
 package org.mariotaku.chameleon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -20,8 +21,10 @@ import org.mariotaku.chameleon.R;
 import static org.mariotaku.chameleon.ChameleonUtils.createTintedDrawable;
 
 /**
+ * Themed CheckBox
  * Created by mariotaku on 2016/12/26.
  */
+@SuppressLint("PrivateResource")
 public class ChameleonCheckBox extends AppCompatCheckBox implements ChameleonView {
 
     public ChameleonCheckBox(Context context) {

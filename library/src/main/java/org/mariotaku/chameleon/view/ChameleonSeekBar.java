@@ -2,7 +2,6 @@ package org.mariotaku.chameleon.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -18,9 +17,9 @@ import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
 
 /**
+ * Themed SeekBar
  * Created by mariotaku on 2016/12/18.
  */
-
 public class ChameleonSeekBar extends AppCompatSeekBar implements ChameleonView {
     public ChameleonSeekBar(Context context) {
         super(context);
@@ -78,22 +77,13 @@ public class ChameleonSeekBar extends AppCompatSeekBar implements ChameleonView 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 view.setThumbTintList(s1);
                 view.setProgressTintList(s1);
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
+            } else {
                 Drawable progressDrawable = ChameleonUtils.createTintedDrawable(view.getProgressDrawable(), s1);
                 view.setProgressDrawable(progressDrawable);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     Drawable thumbDrawable = ChameleonUtils.createTintedDrawable(view.getThumb(), s1);
                     view.setThumb(thumbDrawable);
                 }
-            } else {
-                PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                    mode = PorterDuff.Mode.MULTIPLY;
-                }
-                if (view.getIndeterminateDrawable() != null)
-                    view.getIndeterminateDrawable().setColorFilter(color, mode);
-                if (view.getProgressDrawable() != null)
-                    view.getProgressDrawable().setColorFilter(color, mode);
             }
         }
 

@@ -48,18 +48,19 @@ public class Chameleon {
     private final AppearanceCreator creator;
     private final ArrayMap<ChameleonView, ChameleonView.Appearance> postApplyViews;
 
-    private Chameleon(Activity activity, @Nullable AppearanceCreator creator) {
+    private Chameleon(@NonNull final Activity activity, @Nullable final AppearanceCreator creator) {
         this.activity = activity;
         this.creator = creator;
         this.theme = getOverrideTheme(activity, activity);
         this.postApplyViews = new ArrayMap<>();
     }
 
-    public static Chameleon getInstance(Activity activity) {
+    public static Chameleon getInstance(@NonNull final Activity activity) {
         return getInstance(activity, null);
     }
 
-    public static Chameleon getInstance(Activity activity, AppearanceCreator creator) {
+    public static Chameleon getInstance(@NonNull final Activity activity,
+            @Nullable final AppearanceCreator creator) {
         return new Chameleon(activity, creator);
     }
 
@@ -128,7 +129,7 @@ public class Chameleon {
     }
 
     @NonNull
-    public static Theme getOverrideTheme(Context context, Object obj) {
+    public static Theme getOverrideTheme(@NonNull Context context, @Nullable Object obj) {
         if (obj instanceof Themeable) {
             final Theme theme = ((Themeable) obj).getOverrideTheme();
             if (theme != null) {
@@ -139,18 +140,18 @@ public class Chameleon {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void themeActionMenu(Menu menu) {
+    public void themeActionMenu(@NonNull Menu menu) {
         int itemColor = ChameleonUtils.getColorDependent(theme.getColorToolbar());
         themeMenu(menu, itemColor);
     }
 
-    private void themeMenu(Menu menu, int color) {
+    private void themeMenu(@NonNull Menu menu, int color) {
         for (int i = 0, j = menu.size(); i < j; i++) {
             themeMenuItem(menu.getItem(i), color);
         }
     }
 
-    private void themeMenuItem(MenuItem item, int color) {
+    private void themeMenuItem(@NonNull MenuItem item, int color) {
         if (item.hasSubMenu()) {
             themeMenu(item.getSubMenu(), color);
         }
@@ -163,7 +164,7 @@ public class Chameleon {
         DrawableCompat.setTint(icon, color);
     }
 
-    public void themeActionMode(ActionMode mode) {
+    public void themeActionMode(@NonNull ActionMode mode) {
         if (activity instanceof AppCompatActivity) {
             themeActionMenu(mode.getMenu());
             ActionBarContextView contextView = null;
@@ -187,8 +188,7 @@ public class Chameleon {
     public interface AppearanceCreator {
         @Nullable
         ChameleonView.Appearance createAppearance(@NonNull View view, @NonNull Context context,
-                                                  @NonNull AttributeSet attributeSet,
-                                                  @NonNull Chameleon.Theme theme);
+                @NonNull AttributeSet attributeSet, @NonNull Chameleon.Theme theme);
 
         void applyAppearance(@NonNull View view, @NonNull ChameleonView.Appearance appearance);
     }

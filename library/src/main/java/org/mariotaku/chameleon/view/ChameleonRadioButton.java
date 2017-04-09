@@ -1,5 +1,6 @@
 package org.mariotaku.chameleon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -20,9 +21,10 @@ import org.mariotaku.chameleon.R;
 import static org.mariotaku.chameleon.ChameleonUtils.createTintedDrawable;
 
 /**
+ * Themed RadioButton
  * Created by mariotaku on 2016/12/26.
  */
-
+@SuppressLint("PrivateResource")
 public class ChameleonRadioButton extends AppCompatRadioButton implements ChameleonView {
 
     public ChameleonRadioButton(Context context) {

@@ -28,7 +28,7 @@ import org.mariotaku.chameleon.Chameleon.Theme.LightStatusBarMode;
  */
 
 public class ChameleonUtils {
-    public static int findAttributeIndex(AttributeSet attributeSet, int attributeNameResource) {
+    public static int findAttributeIndex(@NonNull AttributeSet attributeSet, int attributeNameResource) {
         for (int i = 0, j = attributeSet.getAttributeCount(); i < j; i++) {
             if (attributeSet.getAttributeNameResource(i) == attributeNameResource) return i;
         }
@@ -113,7 +113,7 @@ public class ChameleonUtils {
         return isLight ? Color.BLACK : Color.WHITE;
     }
 
-    public static void setOverflowIconColor(Toolbar toolbar, int itemColor) {
+    public static void setOverflowIconColor(@NonNull Toolbar toolbar, int itemColor) {
         final Drawable overflowIcon = toolbar.getOverflowIcon();
         if (overflowIcon != null) {
             overflowIcon.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
@@ -126,8 +126,8 @@ public class ChameleonUtils {
         }
     }
 
-    public static void applyLightStatusBar(Window window, int statusBarColor,
-                                           @LightStatusBarMode int lightStatusBarMode) {
+    public static void applyLightStatusBar(@NonNull Window window, int statusBarColor,
+            @LightStatusBarMode int lightStatusBarMode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             final View decorView = window.getDecorView();
             final int systemUiVisibility = decorView.getSystemUiVisibility();
@@ -147,7 +147,7 @@ public class ChameleonUtils {
         }
     }
 
-    public static void setTaskColor(Activity activity, int color) {
+    public static void setTaskColor(@NonNull Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ChameleonUtilsL.setTaskColor(activity, color);
         }
@@ -155,7 +155,7 @@ public class ChameleonUtils {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static class ChameleonUtilsL {
-        static void setTaskColor(Activity activity, int colorPrimary) {
+        static void setTaskColor(@NonNull Activity activity, int colorPrimary) {
             final ActivityManager.TaskDescription description = new ActivityManager.TaskDescription(null, null, colorPrimary);
             activity.setTaskDescription(description);
         }

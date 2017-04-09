@@ -1,5 +1,6 @@
 package org.mariotaku.chameleon;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ import android.support.v7.view.SupportActionModeWrapper;
 import android.view.Menu;
 
 /**
+ * Chameleon Base activity, all themed activities should extend this call {@link Chameleon} instance
  * Created by mariotaku on 2016/12/18.
  */
-
+@SuppressWarnings("RestrictedApi")
+@SuppressLint("Registered")
 public class ChameleonActivity extends AppCompatActivity implements Chameleon.Themeable {
     private Chameleon mChameleon;
 
