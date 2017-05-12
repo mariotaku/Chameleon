@@ -13,9 +13,9 @@ import android.support.v4.graphics.drawable.DrawableWrapper;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ChameleonActionBarAccessor;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.ChameleonActionBarAccessor;
 import android.support.v7.app.ChameleonAppCompatDelegateAccessor;
 import android.support.v7.app.WindowDecorActionBar;
 import android.support.v7.view.ActionMode;
@@ -39,7 +39,7 @@ import org.mariotaku.chameleon.view.ChameleonActionBarContextView;
 /**
  * Created by mariotaku on 2016/12/18.
  */
-
+@SuppressWarnings("RestrictedApi")
 public class Chameleon {
 
     private final Activity activity;

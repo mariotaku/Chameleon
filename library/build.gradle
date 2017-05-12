@@ -3,13 +3,13 @@ apply plugin: 'maven'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 18
-        versionName "0.9.17"
+        versionCode 19
+        versionName "0.9.18"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

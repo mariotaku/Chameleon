@@ -7,9 +7,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.ChameleonAbsActionBarViewAccessor;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.ChameleonAbsActionBarViewAccessor;
 import android.support.v7.widget.ChameleonActionMenuPresenterAccessor;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -66,7 +67,8 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
 
         if (closeButton != null) {
             if (closeButton.getDrawable() == null) {
-                closeButton.setImageResource(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material);
+                closeButton.setImageDrawable(AppCompatResources.getDrawable(view.getContext(),
+                        android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material));
             }
             closeButton.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
         }
