@@ -1,5 +1,6 @@
 package org.mariotaku.chameleon.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,7 +17,7 @@ import org.mariotaku.chameleon.internal.ChameleonTypedArray;
 /**
  * Created by mariotaku on 2016/12/18.
  */
-
+@SuppressLint("RestrictedApi")
 public class ChameleonActionBarContainer extends ActionBarContainer implements ChameleonView {
     public ChameleonActionBarContainer(Context context) {
         super(context);
