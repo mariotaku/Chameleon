@@ -17,7 +17,6 @@ import org.mariotaku.chameleon.ChameleonUtils;
 import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
 import org.mariotaku.chameleon.internal.ChameleonTypedArray;
-import org.mariotaku.chameleon.internal.ColorStateLists;
 
 import java.lang.reflect.Field;
 
@@ -115,12 +114,7 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                     R.styleable.ChameleonEditText, theme);
             appearance.setTextColor(a.getColorStateList(R.styleable.ChameleonEditText_android_textColor, false));
             appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink(), false));
-            final ColorStateList backgroundTintList = a.getColorStateList(R.styleable.ChameleonEditText_backgroundTint, false);
-            if (backgroundTintList == null) {
-                appearance.setBackgroundTintList(ColorStateLists.tintDefault(theme));
-            } else {
-                appearance.setBackgroundTintList(backgroundTintList);
-            }
+            appearance.setBackgroundTintList(a.getColorStateList(R.styleable.ChameleonEditText_backgroundTint, false));
             appearance.setTintColor(theme.getColorAccent());
             a.recycle();
             return appearance;

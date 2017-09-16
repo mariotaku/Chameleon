@@ -8,6 +8,7 @@
         <attr name="colorPrimary"/>
         <attr name="colorPrimaryDark"/>
         <attr name="colorAccent"/>
+        <attr name="colorControlStateful" format="color|reference"/>
 
         <!-- Text colors -->
         <attr name="android:textColorPrimary"/>

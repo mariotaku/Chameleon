@@ -25,7 +25,7 @@ public class ChameleonTypedArray {
     private final Chameleon.Theme theme;
 
     private ChameleonTypedArray(@NonNull TypedArray wrapped, boolean[] hasAttributeStates,
-            int[] attributeReferences, Chameleon.Theme theme) {
+                                int[] attributeReferences, Chameleon.Theme theme) {
         this.wrapped = wrapped;
         this.hasAttributeStates = hasAttributeStates;
         this.attributeReferences = attributeReferences;
@@ -37,7 +37,7 @@ public class ChameleonTypedArray {
     }
 
     public static ChameleonTypedArray obtain(@NonNull Context context, @Nullable AttributeSet set,
-            int[] attrs, Chameleon.Theme theme) {
+                                             int[] attrs, Chameleon.Theme theme) {
         @SuppressLint("Recycle") TypedArray array = context.obtainStyledAttributes(set, attrs);
         boolean[] hasAttribute = new boolean[attrs.length];
         int[] attributeReferences = new int[attrs.length];
@@ -66,8 +66,8 @@ public class ChameleonTypedArray {
 
     public ColorStateList getColorStateList(int index, boolean resolveStyle) {
         final int ref = attributeReferences[index];
-        int color = getCommonColorReference(ref);
-        if (color != 0) return ColorStateList.valueOf(color);
+        ColorStateList color = getCommonColorStateListReference(ref);
+        if (color != null) return color;
         if (!resolveStyle && !hasAttributeStates[index]) return null;
         return wrapped.getColorStateList(index);
     }
@@ -95,7 +95,19 @@ public class ChameleonTypedArray {
             return theme.getColorControlHighlight();
         } else if (ref == R.attr.colorToolbar) {
             return theme.getColorToolbar();
+        } else if (ref == R.attr.colorControlStateful) {
+            return theme.getColorControlNormal();
         }
         return 0;
+    }
+
+    @Nullable
+    public ColorStateList getCommonColorStateListReference(int ref) {
+        if (ref == R.attr.colorControlStateful) {
+            return ColorStateLists.tintDefault(theme);
+        }
+        final int color = getCommonColorReference(ref);
+        if (color != 0) return ColorStateList.valueOf(color);
+        return null;
     }
 }
