@@ -17,6 +17,7 @@ import org.mariotaku.chameleon.ChameleonUtils;
 import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
 import org.mariotaku.chameleon.internal.ChameleonTypedArray;
+import org.mariotaku.chameleon.internal.ColorStateLists;
 
 import java.lang.reflect.Field;
 
@@ -58,7 +59,7 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
         private ColorStateList textColor;
         private int linkTextColor;
         private int tintColor;
-        private int backgroundTintColor;
+        private ColorStateList backgroundTintList;
 
 
         public int getLinkTextColor() {
@@ -77,12 +78,12 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             this.tintColor = tintColor;
         }
 
-        public int getBackgroundTintColor() {
-            return backgroundTintColor;
+        public ColorStateList getBackgroundTintList() {
+            return backgroundTintList;
         }
 
-        public void setBackgroundTintColor(int backgroundTintColor) {
-            this.backgroundTintColor = backgroundTintColor;
+        public void setBackgroundTintList(ColorStateList backgroundTintList) {
+            this.backgroundTintList = backgroundTintList;
         }
 
         public ColorStateList getTextColor() {
@@ -99,9 +100,9 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
             if (textColor != null) {
                 view.setTextColor(textColor);
             }
-            final int backgroundTintColor = appearance.getBackgroundTintColor();
-            if (backgroundTintColor != 0) {
-                ViewCompat.setBackgroundTintList(view, ColorStateList.valueOf(backgroundTintColor));
+            final ColorStateList backgroundTintList = appearance.getBackgroundTintList();
+            if (backgroundTintList != null) {
+                ViewCompat.setBackgroundTintList(view, backgroundTintList);
             }
             setCursorTint(view, appearance.getTintColor());
             setHandlerTint(view, appearance.getTintColor());
@@ -114,7 +115,12 @@ public class ChameleonTextView extends AppCompatTextView implements ChameleonVie
                     R.styleable.ChameleonEditText, theme);
             appearance.setTextColor(a.getColorStateList(R.styleable.ChameleonEditText_android_textColor, false));
             appearance.setLinkTextColor(a.getColor(R.styleable.ChameleonEditText_android_textColorLink, theme.getTextColorLink(), false));
-            appearance.setBackgroundTintColor(a.getColor(R.styleable.ChameleonEditText_backgroundTint, 0, false));
+            final ColorStateList backgroundTintList = a.getColorStateList(R.styleable.ChameleonEditText_backgroundTint, false);
+            if (backgroundTintList == null) {
+                appearance.setBackgroundTintList(ColorStateLists.tintDefault(theme));
+            } else {
+                appearance.setBackgroundTintList(backgroundTintList);
+            }
             appearance.setTintColor(theme.getColorAccent());
             a.recycle();
             return appearance;
