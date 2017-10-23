@@ -14,10 +14,6 @@ import org.mariotaku.chameleon.R;
 import org.mariotaku.chameleon.internal.ChameleonTypedArray;
 import org.mariotaku.chameleon.internal.SupportMethods;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
-
 public class ChameleonToolbar extends Toolbar implements ChameleonView {
     public ChameleonToolbar(Context context) {
         super(context);

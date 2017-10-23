@@ -22,6 +22,7 @@ import org.mariotaku.chameleon.view.ChameleonAutoCompleteTextView;
 import org.mariotaku.chameleon.view.ChameleonButton;
 import org.mariotaku.chameleon.view.ChameleonCheckBox;
 import org.mariotaku.chameleon.view.ChameleonCheckedTextView;
+import org.mariotaku.chameleon.view.ChameleonCoordinatorLayout;
 import org.mariotaku.chameleon.view.ChameleonEditText;
 import org.mariotaku.chameleon.view.ChameleonFloatingActionButton;
 import org.mariotaku.chameleon.view.ChameleonMultiAutoCompleteTextView;
@@ -120,12 +121,20 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
                 view = new ChameleonCheckedTextView(context, attrs);
                 break;
             }
+            case "android.support.design.widget.CoordinatorLayout": {
+                view = new ChameleonCoordinatorLayout(context, attrs);
+                break;
+            }
             case "android.support.design.widget.FloatingActionButton": {
                 view = new ChameleonFloatingActionButton(context, attrs);
                 break;
             }
-            case "android.support.v7.widget.Toolbar": {
-                view = new ChameleonToolbar(context, attrs);
+            case "android.support.v7.widget.ActionBarContainer": {
+                view = new ChameleonActionBarContainer(context, attrs);
+                break;
+            }
+            case "android.support.v7.widget.ActionBarContextView": {
+                view = new ChameleonActionBarContextView(context, attrs);
                 break;
             }
             case "android.support.v4.widget.SwipeRefreshLayout": {
@@ -136,12 +145,8 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
                 view = new ChameleonSwitchCompat(context, attrs);
                 break;
             }
-            case "android.support.v7.widget.ActionBarContextView": {
-                view = new ChameleonActionBarContextView(context, attrs);
-                break;
-            }
-            case "android.support.v7.widget.ActionBarContainer": {
-                view = new ChameleonActionBarContainer(context, attrs);
+            case "android.support.v7.widget.Toolbar": {
+                view = new ChameleonToolbar(context, attrs);
                 break;
             }
         }
