@@ -11,10 +11,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
-
 public class LayoutInflaterInternal {
     private static Method mOnCreateViewMethod;
     private static Method mCreateViewMethod;

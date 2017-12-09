@@ -5,10 +5,6 @@ import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StyleableRes;
 
-/**
- * Created by mariotaku on 2017/1/11.
- */
-
 public class InternalUtils {
 
     @ColorInt

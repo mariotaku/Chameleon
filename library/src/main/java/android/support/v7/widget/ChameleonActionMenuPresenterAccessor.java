@@ -1,11 +1,9 @@
 package android.support.v7.widget;
 
-/**
- * Created by mariotaku on 2017/1/1.
- */
+import android.support.annotation.NonNull;
 
 public class ChameleonActionMenuPresenterAccessor {
-    public static AppCompatImageView getOverflowButton(ActionMenuPresenter presenter) {
+    public static AppCompatImageView getOverflowButton(@NonNull ActionMenuPresenter presenter) {
         return presenter.mOverflowButton;
     }
 }

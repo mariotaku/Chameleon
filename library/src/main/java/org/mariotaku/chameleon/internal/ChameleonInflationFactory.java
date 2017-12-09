@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.util.ArrayMap;
-import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -34,11 +33,7 @@ import org.mariotaku.chameleon.view.ChameleonSwitchCompat;
 import org.mariotaku.chameleon.view.ChameleonTextView;
 import org.mariotaku.chameleon.view.ChameleonToolbar;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
-
-public class ChameleonInflationFactory implements LayoutInflaterFactory {
+public class ChameleonInflationFactory implements LayoutInflater.Factory2 {
 
     @NonNull
     private final LayoutInflater mInflater;
@@ -67,7 +62,12 @@ public class ChameleonInflationFactory implements LayoutInflaterFactory {
     }
 
     @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return onCreateView(null, name, context, attrs);
+    }
+
+    @Override
+    public View onCreateView(@Nullable View parent, String name, Context context, AttributeSet attrs) {
         View view = null;
         if (shouldSkipTheming(parent)) {
 

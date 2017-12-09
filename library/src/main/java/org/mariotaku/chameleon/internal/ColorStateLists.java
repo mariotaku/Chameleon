@@ -6,10 +6,6 @@ import android.support.v4.graphics.ColorUtils;
 
 import org.mariotaku.chameleon.Chameleon;
 
-/**
- * Created by mariotaku on 2017/9/16.
- */
-
 public class ColorStateLists {
 
     static final int[][] TINT_DEFAULT_STATES = {

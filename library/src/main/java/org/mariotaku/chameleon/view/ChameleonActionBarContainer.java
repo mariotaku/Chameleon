@@ -14,9 +14,6 @@ import org.mariotaku.chameleon.ChameleonView;
 import org.mariotaku.chameleon.R;
 import org.mariotaku.chameleon.internal.ChameleonTypedArray;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
 @SuppressLint("RestrictedApi")
 public class ChameleonActionBarContainer extends ActionBarContainer implements ChameleonView {
     public ChameleonActionBarContainer(Context context) {

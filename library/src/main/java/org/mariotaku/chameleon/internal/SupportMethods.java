@@ -6,9 +6,6 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 
-/**
- * Created by mariotaku on 14/10/23.
- */
 public class SupportMethods {
     private SupportMethods() {
     }

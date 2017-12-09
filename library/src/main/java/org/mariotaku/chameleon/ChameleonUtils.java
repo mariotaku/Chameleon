@@ -23,9 +23,6 @@ import android.view.Window;
 
 import org.mariotaku.chameleon.Chameleon.Theme.LightStatusBarMode;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
 
 public class ChameleonUtils {
     public static int findAttributeIndex(@NonNull AttributeSet attributeSet, int attributeNameResource) {

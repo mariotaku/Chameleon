@@ -14,10 +14,6 @@ import org.mariotaku.chameleon.Chameleon;
 import org.mariotaku.chameleon.ChameleonUtils;
 import org.mariotaku.chameleon.R;
 
-/**
- * Created by mariotaku on 2016/12/18.
- */
-
 public class ChameleonTypedArray {
     private final TypedArray wrapped;
     private final boolean[] hasAttributeStates;
