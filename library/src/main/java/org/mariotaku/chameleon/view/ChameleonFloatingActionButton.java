@@ -5,6 +5,8 @@ import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.ImageViewCompat;
 import android.util.AttributeSet;
 
 import org.mariotaku.chameleon.Chameleon;
@@ -51,12 +53,12 @@ public class ChameleonFloatingActionButton extends FloatingActionButton implemen
     @Override
     public void applyAppearance(@NonNull ChameleonView.Appearance appearance) {
         Appearance a = (Appearance) appearance;
-        setBackgroundTintList(ColorStateList.valueOf(a.getBackgroundTint()));
+        ViewCompat.setBackgroundTintList(this, ColorStateList.valueOf(a.getBackgroundTint()));
         final int iconTint = a.getIconTint();
         if (iconTint == 0) {
-            clearColorFilter();
+            ImageViewCompat.setImageTintList(this, null);
         } else {
-            setColorFilter(iconTint);
+            ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(iconTint));
         }
     }
 

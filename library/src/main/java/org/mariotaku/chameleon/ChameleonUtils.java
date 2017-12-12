@@ -88,11 +88,7 @@ public class ChameleonUtils {
 
     public static void tintOrColor(@Nullable Drawable drawable, @ColorInt int color) {
         if (drawable == null) return;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-        } else {
-            DrawableCompat.setTint(drawable, color);
-        }
+        DrawableCompat.setTint(drawable, color);
     }
 
     @CheckResult
@@ -113,18 +109,18 @@ public class ChameleonUtils {
     public static void setOverflowIconColor(@NonNull Toolbar toolbar, int itemColor) {
         final Drawable overflowIcon = toolbar.getOverflowIcon();
         if (overflowIcon != null) {
-            overflowIcon.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
+            DrawableCompat.setTint(overflowIcon, itemColor);
             toolbar.setOverflowIcon(overflowIcon);
         }
         final Drawable navigationIcon = toolbar.getNavigationIcon();
         if (navigationIcon != null) {
-            navigationIcon.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
+            DrawableCompat.setTint(navigationIcon, itemColor);
             toolbar.setNavigationIcon(navigationIcon);
         }
     }
 
     public static void applyLightStatusBar(@NonNull Window window, int statusBarColor,
-            @LightStatusBarMode int lightStatusBarMode) {
+                                           @LightStatusBarMode int lightStatusBarMode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             final View decorView = window.getDecorView();
             final int systemUiVisibility = decorView.getSystemUiVisibility();

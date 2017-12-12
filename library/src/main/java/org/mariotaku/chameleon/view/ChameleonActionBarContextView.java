@@ -2,11 +2,12 @@ package org.mariotaku.chameleon.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.PorterDuff;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.ActionBarContextView;
 import android.support.v7.widget.AppCompatImageView;
@@ -61,16 +62,16 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
         final AppCompatImageView overflowIconView = ChameleonActionMenuPresenterAccessor.getOverflowButton(
                 ChameleonAbsActionBarViewAccessor.getActionMenuPresenter(view));
         if (overflowIconView != null) {
-            overflowIconView.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
+            ImageViewCompat.setImageTintList(overflowIconView, ColorStateList.valueOf(itemColor));
         }
-        ImageView closeButton = (ImageView) view.findViewById(android.support.v7.appcompat.R.id.action_mode_close_button);
+        ImageView closeButton = view.findViewById(android.support.v7.appcompat.R.id.action_mode_close_button);
 
         if (closeButton != null) {
             if (closeButton.getDrawable() == null) {
                 closeButton.setImageDrawable(AppCompatResources.getDrawable(view.getContext(),
                         android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material));
             }
-            closeButton.setColorFilter(itemColor, PorterDuff.Mode.SRC_ATOP);
+            ImageViewCompat.setImageTintList(closeButton, ColorStateList.valueOf(itemColor));
         }
     }
 
@@ -117,8 +118,8 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
 
         public static void apply(final ActionBarContextView view, final Appearance appearance) {
             view.setTitle(view.getTitle());
-            TextView titleView = (TextView) view.findViewById(android.support.v7.appcompat.R.id.action_bar_title);
-            TextView subTitleView = (TextView) view.findViewById(android.support.v7.appcompat.R.id.action_bar_subtitle);
+            TextView titleView = view.findViewById(android.support.v7.appcompat.R.id.action_bar_title);
+            TextView subTitleView = view.findViewById(android.support.v7.appcompat.R.id.action_bar_subtitle);
             titleView.setTextColor(appearance.getTitleTextColor());
             subTitleView.setTextColor(appearance.getSubTitleTextColor());
             SupportMethods.setBackground(view, appearance.getBackground());
