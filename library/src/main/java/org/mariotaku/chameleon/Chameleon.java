@@ -9,7 +9,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.graphics.drawable.DrawableWrapper;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.ActionBar;
@@ -154,11 +153,11 @@ public class Chameleon {
         }
         Drawable icon = item.getIcon();
         if (icon == null) return;
-        if (!(icon instanceof DrawableWrapper)) {
-            icon = DrawableCompat.wrap(icon);
-            item.setIcon(icon);
+        Drawable wrapped = DrawableCompat.wrap(icon);
+        if (wrapped != icon) {
+            item.setIcon(wrapped);
         }
-        DrawableCompat.setTint(icon, color);
+        DrawableCompat.setTint(wrapped, color);
     }
 
     public void themeActionMode(@NonNull ActionMode mode) {
