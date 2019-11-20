@@ -1,8 +1,8 @@
 package org.mariotaku.chameleon.internal;
 
 import android.content.res.ColorStateList;
-import android.support.annotation.NonNull;
-import android.support.v4.graphics.ColorUtils;
+import androidx.annotation.NonNull;
+import androidx.core.graphics.ColorUtils;
 
 import org.mariotaku.chameleon.Chameleon;
 

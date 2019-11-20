@@ -6,8 +6,8 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
 import org.mariotaku.chameleon.Chameleon;
@@ -77,17 +77,17 @@ public class ChameleonTypedArray {
     }
 
     public int getCommonColorReference(int ref) {
-        if (ref == android.support.design.R.attr.colorPrimary) {
+        if (ref == com.google.android.material.R.attr.colorPrimary) {
             return theme.getColorPrimary();
-        } else if (ref == android.support.design.R.attr.colorPrimaryDark) {
+        } else if (ref == com.google.android.material.R.attr.colorPrimaryDark) {
             return theme.getColorPrimaryDark();
-        } else if (ref == android.support.design.R.attr.colorAccent) {
+        } else if (ref == com.google.android.material.R.attr.colorAccent) {
             return theme.getColorAccent();
-        } else if (ref == android.support.design.R.attr.colorControlNormal) {
+        } else if (ref == com.google.android.material.R.attr.colorControlNormal) {
             return theme.getColorControlNormal();
-        } else if (ref == android.support.design.R.attr.colorControlActivated) {
+        } else if (ref == com.google.android.material.R.attr.colorControlActivated) {
             return theme.getColorControlActivated();
-        } else if (ref == android.support.design.R.attr.colorControlHighlight) {
+        } else if (ref == com.google.android.material.R.attr.colorControlHighlight) {
             return theme.getColorControlHighlight();
         } else if (ref == R.attr.colorToolbar) {
             return theme.getColorToolbar();

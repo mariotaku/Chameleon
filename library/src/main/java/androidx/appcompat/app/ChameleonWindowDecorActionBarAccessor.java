@@ -1,6 +1,6 @@
-package android.support.v7.app;
+package androidx.appcompat.app;
 
-import android.support.v7.widget.DecorToolbar;
+import androidx.appcompat.widget.DecorToolbar;
 
 public class ChameleonWindowDecorActionBarAccessor {
     public static DecorToolbar getWindowDecorActionBar(WindowDecorActionBar actionBar) {

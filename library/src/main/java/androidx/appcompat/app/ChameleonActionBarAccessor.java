@@ -1,7 +1,7 @@
-package android.support.v7.app;
+package androidx.appcompat.app;
 
-import android.support.v7.widget.ActionBarContextView;
-import android.support.v7.widget.DecorToolbar;
+import androidx.appcompat.widget.ActionBarContextView;
+import androidx.appcompat.widget.DecorToolbar;
 
 public class ChameleonActionBarAccessor {
 

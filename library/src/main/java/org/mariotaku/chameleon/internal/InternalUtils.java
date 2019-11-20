@@ -2,8 +2,8 @@ package org.mariotaku.chameleon.internal;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.support.annotation.ColorInt;
-import android.support.annotation.StyleableRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.StyleableRes;
 
 public class InternalUtils {
 

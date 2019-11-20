@@ -2,10 +2,13 @@ package org.mariotaku.chameleon.internal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.view.ContextThemeWrapper;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -14,7 +17,9 @@ import java.lang.reflect.Method;
 public class LayoutInflaterInternal {
     private static Method mOnCreateViewMethod;
     private static Method mCreateViewMethod;
+    @Nullable
     private static Field mConstructorArgsField;
+    @Nullable
     private static int[] ATTRS_THEME;
 
     public static View onCreateView(LayoutInflater inflater, View view, String name, AttributeSet attrs) {
@@ -54,8 +59,10 @@ public class LayoutInflaterInternal {
         return null;
     }
 
+    @Nullable
     public static Object[] getConstructorArgs(LayoutInflater inflater) {
         try {
+            if (mConstructorArgsField == null) return null;
             return (Object[]) mConstructorArgsField.get(inflater);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -81,15 +88,14 @@ public class LayoutInflaterInternal {
                 throw new RuntimeException("Failed to retrieve the createView method.", e);
             }
         }
-        if (mConstructorArgsField == null) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && mConstructorArgsField == null) {
             try {
                 mConstructorArgsField = LayoutInflater.class.getDeclaredField("mConstructorArgs");
                 mConstructorArgsField.setAccessible(true);
             } catch (NoSuchFieldException e) {
-                throw new RuntimeException("Failed to retrieve the mConstructorArgs field.", e);
             }
         }
-        if (ATTRS_THEME == null) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ATTRS_THEME == null) {
             try {
                 final Field attrsThemeField = LayoutInflater.class.getDeclaredField("ATTRS_THEME");
                 attrsThemeField.setAccessible(true);

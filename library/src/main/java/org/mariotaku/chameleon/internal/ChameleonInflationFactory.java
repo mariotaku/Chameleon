@@ -3,14 +3,16 @@ package org.mariotaku.chameleon.internal;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.util.ArrayMap;
-import android.support.v7.app.AppCompatDelegate;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.collection.ArrayMap;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import org.mariotaku.chameleon.Chameleon;
 import org.mariotaku.chameleon.ChameleonView;
@@ -184,18 +186,27 @@ public class ChameleonInflationFactory implements LayoutInflater.Factory2 {
 
                     Object[] mConstructorArgs = LayoutInflaterInternal.getConstructorArgs(mInflater);
 
-                    final Object lastContext = mConstructorArgs[0];
-                    mConstructorArgs[0] = viewContext;
+                    Object lastContext = null;
+                    if (mConstructorArgs != null) {
+                        lastContext = mConstructorArgs[0];
+                        mConstructorArgs[0] = viewContext;
+                    }
                     try {
                         if (-1 == name.indexOf('.')) {
-                            view = LayoutInflaterInternal.onCreateView(mInflater, parent, name, attrs);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                view = mInflater.onCreateView(viewContext, parent, name, attrs);
+                            } else {
+                                view = LayoutInflaterInternal.onCreateView(mInflater, parent, name, attrs);
+                            }
                         } else {
                             view = LayoutInflaterInternal.createView(mInflater, name, null, attrs);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-                        mConstructorArgs[0] = lastContext;
+                        if (mConstructorArgs != null) {
+                            mConstructorArgs[0] = lastContext;
+                        }
                     }
                 } catch (Throwable t) {
                     throw new RuntimeException(String.format("An error occurred while inflating View %s: %s", name, t.getMessage()), t);

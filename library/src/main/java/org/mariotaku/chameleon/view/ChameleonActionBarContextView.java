@@ -5,17 +5,18 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.ImageViewCompat;
-import android.support.v7.content.res.AppCompatResources;
-import android.support.v7.widget.ActionBarContextView;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.ChameleonAbsActionBarViewAccessor;
-import android.support.v7.widget.ChameleonActionMenuPresenterAccessor;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.ActionBarContextView;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.ChameleonAbsActionBarViewAccessor;
+import androidx.appcompat.widget.ChameleonActionMenuPresenterAccessor;
+import androidx.core.widget.ImageViewCompat;
 
 import org.mariotaku.chameleon.Chameleon;
 import org.mariotaku.chameleon.ChameleonUtils;
@@ -64,12 +65,12 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
         if (overflowIconView != null) {
             ImageViewCompat.setImageTintList(overflowIconView, ColorStateList.valueOf(itemColor));
         }
-        ImageView closeButton = view.findViewById(android.support.v7.appcompat.R.id.action_mode_close_button);
+        ImageView closeButton = view.findViewById(androidx.appcompat.R.id.action_mode_close_button);
 
         if (closeButton != null) {
             if (closeButton.getDrawable() == null) {
                 closeButton.setImageDrawable(AppCompatResources.getDrawable(view.getContext(),
-                        android.support.v7.appcompat.R.drawable.abc_ic_ab_back_material));
+                        androidx.appcompat.R.drawable.abc_ic_ab_back_material));
             }
             ImageViewCompat.setImageTintList(closeButton, ColorStateList.valueOf(itemColor));
         }
@@ -118,8 +119,8 @@ public class ChameleonActionBarContextView extends ActionBarContextView implemen
 
         public static void apply(final ActionBarContextView view, final Appearance appearance) {
             view.setTitle(view.getTitle());
-            TextView titleView = view.findViewById(android.support.v7.appcompat.R.id.action_bar_title);
-            TextView subTitleView = view.findViewById(android.support.v7.appcompat.R.id.action_bar_subtitle);
+            TextView titleView = view.findViewById(androidx.appcompat.R.id.action_bar_title);
+            TextView subTitleView = view.findViewById(androidx.appcompat.R.id.action_bar_subtitle);
             titleView.setTextColor(appearance.getTitleTextColor());
             subTitleView.setTextColor(appearance.getSubTitleTextColor());
             SupportMethods.setBackground(view, appearance.getBackground());

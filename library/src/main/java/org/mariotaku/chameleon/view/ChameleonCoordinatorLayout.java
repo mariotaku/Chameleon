@@ -2,7 +2,7 @@ package org.mariotaku.chameleon.view;
 
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 
 import org.mariotaku.chameleon.ChameleonView;
